@@ -7,4 +7,9 @@
 {% block content %}
 <h1>Event Übersicht</h1>
 <a href="/">Homepage</a>
+<ul>
+{% for event in events  %}
+  <li>{{event.title}}</li>
+{% endfor %}
+</ul>
 {% endblock content %}
