@@ -7,7 +7,7 @@ class VenueSchema(ModelSchema):
     model = Venue
     fields = ('name', 'street', 'zip_code', 'city')
 
-class EventSchema(ModelSchema):
+class EventSchema(ModelSchema): 
   location: Optional[VenueSchema] = None
   
   class Meta:
