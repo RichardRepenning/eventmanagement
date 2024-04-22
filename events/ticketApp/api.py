@@ -1,6 +1,6 @@
 from ninja import NinjaAPI
-from ticketApp.models import Event, Venue
-from ticketApp.schemas import EventSchema, VenueSchema
+from ticketApp.models import Event, Location
+from ticketApp.schemas import EventSchema, LocationSchema
 
 app = NinjaAPI()
 
@@ -8,6 +8,6 @@ app = NinjaAPI()
 def get_events(request):
   return Event.objects.all()
 
-@app.get("venues/", response=list[VenueSchema])
+@app.get("locations/", response=list[LocationSchema])
 def get_events(request):
-  return Venue.objects.all()
+  return Location.objects.all()
