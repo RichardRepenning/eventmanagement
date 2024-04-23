@@ -22,7 +22,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="" id="loginForm">
+            <form action="" method="post" id="loginForm">
+              {% csrf_token %}
               <div class="mb-3">
                 <label for="username" class="form-label">Benutzername</label>
                 <input type="email" class="form-control" id="username">
@@ -41,6 +42,6 @@
       </div>
     </div>
   {% endblock modal %}
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

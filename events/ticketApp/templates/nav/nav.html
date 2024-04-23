@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
-  <div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" href="/">Logo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle Navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,16 @@
         </li>
         <li>
         {% if user.is_authenticated %}
-        <button class="btn btn-primary">Account</button>
+        <div class="dropdown ">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Account
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/account">Account</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Ausloggen</a></li>
+          </ul>
+        </div>
         {% else %}
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
         {% endif %}
