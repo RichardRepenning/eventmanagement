@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Benutzername</label>
+      {% render_field form.username class="form-control" id="username" %}
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Passwort</label>
+      {% render_field form.password class="form-control" id="password" %}
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+  </form>
+  <p>Du hast noch keinen Account? Registriere dich <a href="/signup">hier</a></p>
+</div>
+{% endblock content %}
