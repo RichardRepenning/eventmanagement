@@ -20,20 +20,6 @@ def events(request):
 def main(request):
   return render(request, 'index.html')
 
-def signup(request):
-  if request.method == "POST":
-    form = SignupForm(request.POST)
-
-    if form.is_valid():
-      form.save()
-      return redirect("/login/")
-  else:  
-    form = SignupForm()
-  
-  return render(request, 'auth/signup.html', {
-    'form': form
-  })
-
 # Function for testing different aspects of Django
 # without breaking main project
 def testing(request):
@@ -42,6 +28,3 @@ def testing(request):
     'genres': ['Techno', 'Rock', 'Pop']
   }
   return HttpResponse(template.render(context, request))
-
-def account(request):
-  return render(request, 'account/account.html')
