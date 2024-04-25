@@ -1,13 +1,14 @@
+<!-- Richard Repenning - Signup Form Template - Visitors can create a new account -->
+
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
 {% block content %}
-  <h1>Signup</h1>
-  <div class="container">
+<div class="container">
+    <h1>Signup</h1>
     <form method="post" action=".">
       {% csrf_token %}
 
-      {{form.non_field_errors}}
       <h3>Persönliche Daten</h3>
 
       <div class="input-group mb-3">
@@ -34,7 +35,16 @@
         {{form.password2|add_class:'form-control'}}
       </div>
 
-      <button class="btn btn-primary" type="submit">Registrieren</button>
+      <!-- Future TODO: Translate form errors and improve them -->
+      {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+          {{form.errors}}
+        </div>
+      {% endif %}
+      
+
+      <button class="btn btn-primary mb-3" type="submit">Registrieren</button>
     </form>
+    <p>Du hast bereits einen Account? Logge dich <a href="{% url 'login' %}">hier</a> ein!</p>
   </div>
 {% endblock content %}

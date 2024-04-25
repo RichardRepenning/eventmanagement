@@ -1,9 +1,11 @@
+<!-- Richard Repenning - Login Form Template - Vistors can login into their accounts -->
+
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
 {% block content %}
 <div class="container">
-  <form action="" method="post">
+  <form action="{%url 'login' %}" method="post">
     {% csrf_token %}
     <div class="mb-3">
       <label for="username" class="form-label">Benutzername</label>
@@ -17,6 +19,6 @@
       <button type="submit" class="btn btn-primary">Login</button>
     </div>
   </form>
-  <p>Du hast noch keinen Account? Registriere dich <a href="/signup">hier</a></p>
+  <p>Du hast noch keinen Account? Registriere dich <a href="{% url 'signup' %}">hier</a></p>
 </div>
 {% endblock content %}

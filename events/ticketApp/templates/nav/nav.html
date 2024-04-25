@@ -21,11 +21,11 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/account">Account</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/logout">Ausloggen</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Ausloggen</a></li>
           </ul>
         </div>
         {% else %}
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
         {% endif %}
       </li>
       </ul>

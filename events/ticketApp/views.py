@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 from .models import Event
+from django.contrib.auth import logout, login, authenticate
 from .forms import SignupForm
 
 def events(request):
@@ -19,6 +20,20 @@ def events(request):
 
 def main(request):
   return render(request, 'index.html')
+
+def sign_up(request):
+  if request.method == 'POST':
+    form = SignupForm(request.POST)
+    # validate the form 
+    # https://docs.djangoproject.com/en/5.0/topics/forms/
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('main')
+  else:
+    form = SignupForm()
+  
+  return render(request, 'registration/signup.html', {'form': form})
 
 # Function for testing different aspects of Django
 # without breaking main project

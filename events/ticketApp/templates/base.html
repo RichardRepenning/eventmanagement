@@ -15,33 +15,7 @@
   {% endblock content %}
 
   {% block modal %}
-    <div class="modal fade" tabindex="-1" id="loginModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Einloggen</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="" method="post" id="loginForm">
-              {% csrf_token %}
-              <div class="mb-3">
-                <label for="username" class="form-label">Benutzername</label>
-                <input type="email" class="form-control" id="username">
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-            <button type="button" class="btn btn-primary" form="loginForm" type="submit" value="Login">Login</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   {% endblock modal %}
   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
