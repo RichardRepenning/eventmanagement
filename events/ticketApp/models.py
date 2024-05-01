@@ -1,3 +1,5 @@
+# This file contains the models for the project
+
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import gettext_lazy as _
@@ -5,6 +7,7 @@ import uuid
 
 # Create your models here.
 class Location(models.Model):
+  # Richard Repenning - Location Class
   name = models.CharField(max_length=200)
   street = models.CharField(max_length=200)
   zip_code = models.IntegerField(null=True)
@@ -14,7 +17,7 @@ class Location(models.Model):
     return self.name
 
 class Event(models.Model):
-
+  # Richard Repenning - Event Class
   class EventStatus(models.TextChoices):
     ACTIVE = "AC", _("Aktiv")
     INACTIVE = "IA", _("Inaktiv")
