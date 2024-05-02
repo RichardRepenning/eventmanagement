@@ -5,10 +5,12 @@
 {% endblock title %}
 
 {% block content %}
+<div class="container">
 <h1>Events Übersicht</h1>
 <ul>
 {% for event in events  %}
   <li>{{event.title}}</li>
 {% endfor %}
 </ul>
+</div>
 {% endblock content %}

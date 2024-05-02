@@ -38,6 +38,16 @@ def profile(request):
   user = request.user
   user_profile = request.user.profile
 
+  # Richard Repenning - 
+  # Check if profile info is missing to display a message in the frontend
+  required_fields = ['street', 'zip_code', 'city', 'birth_date']
+  profile_incomplete = False
+
+  for field in required_fields:
+    if not getattr(user_profile, field):
+      profile_incomplete = True
+      break
+
   user_information = {
     "first_name": user.first_name,
     "last_name": user.last_name,
@@ -50,7 +60,12 @@ def profile(request):
     "birth_date": user_profile.birth_date
   }
 
-  return render(request, "profile/index.html", user_information)
+  context = {
+    'user_profile': user_information,
+    'profile_incomplete': profile_incomplete
+  }
+
+  return render(request, "profile/index.html", context)
 
 # Function for testing different aspects of Django
 # without breaking main project
