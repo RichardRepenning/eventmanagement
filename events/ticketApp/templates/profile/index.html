@@ -1,6 +1,7 @@
 <!-- Richard Repenning - Display User Profile Information -->
 
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
   Dein Profil - Eventmanagement App
@@ -13,17 +14,17 @@
     {% if profile_incomplete %}
     <div class="pe-5">
       <div class="alert alert-warning" role="alert">
-        Dein Profil ist noch unvollständig!
+        Dein Profil ist noch unvollständig! <a href="/profile/update">Jetzt vervollständigen!</a>
       </div>
     </div>
     {% endif %}
     <div class="col-6">
       <h5>Vorname</h5>
-      {{user_profile.first_name}}
+      {{request.user.first_name}}
     </div>
     <div class="col-6">
       <h5>Nachname</h5>
-      {{user_profile.last_name}}
+      {{request.user.last_name}}
     </div>
     <div class="col-6">
       <h5>Straße & Nr.</h5>
@@ -42,11 +43,11 @@
     <h3>Deine Account Informationen</h3>
     <div class="col-6">
       <h5>Benutzername</h5>
-      {{user_profile.username}}
+      {{request.user.get_username}}
     </div>
     <div class="col-6">
       <h5>E-Mail</h5>
-      {{user_profile.email}}
+      {{request.user.email}}
     </div>
   </div>
 </div>

@@ -4,6 +4,8 @@ from django.template import loader
 from .models import Event
 from django.contrib.auth import logout, login, authenticate
 from .forms import SignupForm, ProfileForm
+from django.db import transaction
+from django.contrib.auth.decorators import login_required
 
 def main(request):
   return render(request, 'index.html')
@@ -35,41 +37,52 @@ def events(request):
   return HttpResponse(template.render(context, request))
 
 def profile(request):
-  user = request.user
   user_profile = request.user.profile
+  if request.method=='POST':
+    form = ProfileForm(request.POST, instance=request.user.profile)
+    if form.is_valid():
+      form.save()
+  else:
+    # Richard Repenning
+    # Check if profile info is missing to display a message in the frontend
+    required_fields = ['street', 'zip_code', 'city', 'birth_date']
+    profile_incomplete = False
 
-  # Richard Repenning - 
-  # Check if profile info is missing to display a message in the frontend
-  required_fields = ['street', 'zip_code', 'city', 'birth_date']
-  profile_incomplete = False
+    for field in required_fields:
+      if not getattr(user_profile, field):
+        profile_incomplete = True
+        break
 
-  for field in required_fields:
-    if not getattr(user_profile, field):
-      profile_incomplete = True
-      break
+    form = ProfileForm()
 
-  user_information = {
-    "first_name": user.first_name,
-    "last_name": user.last_name,
-    "username": user.get_username(),
-    "email": user.email,
-    "name": user.get_full_name(),
-    "street": user_profile.street,
-    "zip_code": user_profile.zip_code,
-    "city": user_profile.city,
-    "birth_date": user_profile.birth_date
-  }
+    context = {
+      'user_profile': user_profile,
+      'profile_incomplete': profile_incomplete,
+      'form': form
+    }
 
-  context = {
-    'user_profile': user_information,
-    'profile_incomplete': profile_incomplete
-  }
+    return render(request, "profile/index.html", context)
 
-  return render(request, "profile/index.html", context)
+@login_required
+@transaction.atomic
+def update_profile(request):
+  user_profile = request.user.profile
+  if request.method == 'POST':
+    profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    if profile_form.is_valid():
+      profile_form.save()
+      return redirect("profile")
+    else:
+      profile_form = ProfileForm(instance=request.user.profile)
+  else:
+    data = {'street': user_profile.street, 'zip_code': user_profile.zip_code, 'city': user_profile.city, 'birth_date': user_profile.birth_date}
+    profile_form = ProfileForm(initial=data)
+  return render(request, 'profile/update.html', {'profile_form': profile_form})
 
-# Function for testing different aspects of Django
-# without breaking main project
+
 def testing(request):
+# View for testing different aspects of Django
+# without breaking main project
   template = loader.get_template('template.html')
   context = {
     'genres': ['Techno', 'Rock', 'Pop']

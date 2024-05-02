@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="container">
+    <h1>Profilinformationen vervollständigen</h1>
+      <form method="POST" class="row">
+        {% csrf_token %}
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          {% render_field profile_form.street class="form-control" id="street" placeholder="name@beispiel.de" %}
+          <label for="street">Straße & Nr.</label>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-floating mb-3">
+          {% render_field profile_form.zip_code class="form-control" id="zip_code" placeholder="Plz." %}
+          <label for="zip_code">Plz.</label>
+        </div>
+      </div>
+      <div class="col-10">
+        <div class="form-floating mb-3">
+          {% render_field profile_form.city class="form-control" id="city" placeholder="Stadt" %}
+          <label for="city">Stadt</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          {% render_field profile_form.birth_date class="form-control" id="birth_date" placeholder="Geburtstag" type="date" %}
+          <label for="birth_date">Geburtstag</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary">Speichern</button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

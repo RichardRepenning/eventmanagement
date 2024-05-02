@@ -9,10 +9,11 @@
 
 ## Änderungsverlauf
 
-| Datum      | Änderung   | Autor             |
-| ---------- | ---------- | ----------------- |
-| 17.04.2024 | Einleitung | Richard Repenning |
-| 17.04.2024 | Auftrag    | Richard Repenning |
+| Datum      | Änderung         | Autor             |
+| ---------- | ---------------- | ----------------- |
+| 17.04.2024 | Einleitung       | Richard Repenning |
+| 17.04.2024 | Auftrag          | Richard Repenning |
+| 19.04.2024 | Auftrag - Profil | Richard Repenning |
 
 
 ## 1. Einleitung
@@ -41,6 +42,7 @@ Ein Event kann von einem Administrator angelegt werden. Ein Event wird einer Loc
 Events werden auf der Seite in einer Eventübersicht angezeigt. Die Eventübersicht ist aufsteigend nach Datum sortiert, d.h. das am nächsten gelegene Event wird als erstes angezeigt. Events, die bereits abgelaufen sind oder "inaktiv" Status haben, werden nicht mehr angezeigt und automatisch archiviert. Ein Event besitzt einen Status ("abgesagt", "ausverkauft"). Der Status kann im Adminbereich verändert werden. Ein neues Event hat standardmäßig den status "inaktiv". Ist die maximale Anzahl an Tickets verkauft, wird der Status des Events automatisch auf "ausverkauft" gesetzt. Ein Event mit diesem Status, das noch nicht stattgefunden hat wird in der Übersicht noch angezeigt, der Ticketkauf ist nicht mehr möglich.
 
 #### Ticket
+
 Ein Ticket wird bei erfolgreichem Kauf einem Event zugeordnet und belegt einen Platz bei den verkauften Tickets.
 Für den Kauf eines Tickets benötigt der Käufer einen Account. Das gekaufte Ticket wird dem Account zugeordnet und ist personalisiert.
 Hat das Event noch nicht stattgefunden kann das Ticket bis 24 Stunden vor Beginn des Events storniert werden. Wurde ein Ticket storniert ist das Ticket zum Kauf wieder verfügbar. Das Ticket ist nach dem Kauf im Kundenkonto sichtbar und kann dort heruntergeladen werden. Ein storniertes Ticket wird mit dem Status weiterhin angezeigt.
@@ -73,4 +75,13 @@ Ein Benutzeraccount hat die folgenden Informationen:
 - email: Die E-Mail Adresse des Benutzers.
 - first_name: Der Vorname des Benutzers.
 - last_name: Der Nachname des Benutzers.
-- tickets: Eine Liste an Ticket-IDs
+
+#### Profil
+Das Profil eines Nutzers ist direkt mit dem Benutzer verbunden. Sobald ein Besucher einen Benutzer-Account erstellt wird auch ein Profil erstellt. Das Profil enthält die persönlichen Informationen des Benutzers. Wird ein Benutzer gelöscht so wird auch das zugehörige Profil gelöscht. Die Profilinformationen können vom Benutzer bearbeitet werden.
+Ein Profil hat die folgenden Informationen:
+
+- user: Der verknüpfte Benutzer-Account
+- street: Straße der Wohnadresse
+- zip_code: Postleitzahl der Wohnadresse
+- city: Stadt der Wohnadresse
+- birth_date: Geburtsdatum des Benutzers
