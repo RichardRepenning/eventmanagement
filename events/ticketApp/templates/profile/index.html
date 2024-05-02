@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Dein Profil - Eventmanagement App
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row shadow-sm mb-3">
+    <h3>Deine persönlichen Informationen</h3>
+    <div class="col-6">
+      {{first_name}}
+    </div>
+    <div class="col-6">
+      {{last_name}}
+    </div>
+    <div class="col-6"></div>
+  </div>
+  <div class="row shadow-sm">
+    <h3>Deine Account Informationen</h3>
+    <div class="col-6">{{username}}</div>
+    <div class="col-6"></div>
+    <div class="col-6"></div>
+  </div>
+</div>
+{% endblock content %}
