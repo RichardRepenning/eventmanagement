@@ -36,13 +36,20 @@ def events(request):
 
 def profile(request):
   user = request.user
+  user_profile = request.user.profile
+
   user_information = {
     "first_name": user.first_name,
     "last_name": user.last_name,
     "username": user.get_username(),
+    "email": user.email,
     "name": user.get_full_name(),
-
+    "street": user_profile.street,
+    "zip_code": user_profile.zip_code,
+    "city": user_profile.city,
+    "birth_date": user_profile.birth_date
   }
+
   return render(request, "profile/index.html", user_information)
 
 # Function for testing different aspects of Django

@@ -1,3 +1,5 @@
+<!-- Richard Repenning - Display User Profile Information -->
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -5,22 +7,40 @@
 {% endblock title %}
 
 {% block content %}
-<div class="container">
-  <div class="row shadow-sm mb-3">
+<div class="container mt-5">
+  <div class="row shadow mb-3 py-3">
     <h3>Deine persönlichen Informationen</h3>
     <div class="col-6">
+      <h5>Vorname</h5>
       {{first_name}}
     </div>
     <div class="col-6">
+      <h5>Nachname</h5>
       {{last_name}}
     </div>
-    <div class="col-6"></div>
+    <div class="col-6">
+      <h5>Straße & Nr.</h5>
+      {{street}}
+    </div>
+    <div class="col-6">
+      <h5>Plz. & Stadt</h5>
+      {{zip_code}} {{city}}
+    </div>
+    <div class="col-6">
+      <h5>Geburtsdatum</h5>
+      {{birth_date}}
+    </div>
   </div>
-  <div class="row shadow-sm">
+  <div class="row shadow py-3">
     <h3>Deine Account Informationen</h3>
-    <div class="col-6">{{username}}</div>
-    <div class="col-6"></div>
-    <div class="col-6"></div>
+    <div class="col-6">
+      <h5>Benutzername</h5>
+      {{username}}
+    </div>
+    <div class="col-6">
+      <h5>E-Mail</h5>
+      {{email}}
+    </div>
   </div>
 </div>
 {% endblock content %}
