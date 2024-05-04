@@ -2,10 +2,12 @@
 
 {% block content %}
 <div class="container">
-    <h1>Events</h1>
+    <div class="col mt-5 shadow p-3">
+        <h4 class="mb-0">Alle Veranstaltungen</h4>
+        <p class="text-body-secondary">Ergebnisse: {{events|length}}</p>
+    </div>
     <div class="row">
         {% include "events/events-list.html" %}
     </div>
-
 </div>
 {% endblock %}
