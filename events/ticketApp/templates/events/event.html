@@ -1,3 +1,4 @@
+<!--Richard Repenning - Event Detail Page-->
 {% extends 'base.html' %}
 
 {% block title %}
@@ -13,7 +14,7 @@
   <div class="card-body">
     <h5 class="card-title">{{event.title}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{event.date_from}} - {{event.date_to}}</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text">{{event.description|truncatechars:100}}</p>
   </div>
 </div>
 {% endfor %}

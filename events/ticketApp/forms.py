@@ -7,9 +7,6 @@ from .models import Profile
 
 
 class SignupForm(UserCreationForm):
-    """
-    Register for a new account.
-    """
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -18,20 +15,12 @@ class SignupForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
-    """
-    Personal User information
-    """
-
     class Meta:
         model = Profile
         fields = ('street', 'zip_code', 'city', 'birth_date')
 
 
 class LoginForm(AuthenticationForm):
-    """
-    Login to an existing account.
-    """
-
     class Meta:
         model = User
         fields = ('username', 'password')

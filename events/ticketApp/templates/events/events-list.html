@@ -1,0 +1,13 @@
+<!--Richard Repenning - Eventslist for index page-->
+
+{% for event in events  %}
+<div class="col">
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{event.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{event.date_from}} - {{event.date_to}}</h6>
+            <p class="card-text">{{event.description|truncatechars:100}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
