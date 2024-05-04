@@ -66,3 +66,13 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user.first_name} {self.user.last_name} - {self.user.username}"
+
+
+class Ticket(models.Model):
+    id = ShortUUIDField(primary_key=True, editable=False)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        unique_together = ('user', 'event')
