@@ -2,6 +2,7 @@
 
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
+from shortuuidfield import ShortUUIDField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
@@ -30,7 +31,7 @@ class Event(models.Model):
         CANCELLED = "CA", _("Abgesagt")
         SOLDOUT = "SO", _("Ausverkauft")
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = ShortUUIDField(primary_key=True, editable=False)
     title = models.CharField(max_length=200)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
     date_from = models.DateTimeField()
@@ -39,7 +40,7 @@ class Event(models.Model):
     max_participants = models.IntegerField()
     tickets_sold = models.IntegerField(default=0)
     event_status = models.CharField(max_length=2, choices=EventStatus.choices, default=EventStatus.INACTIVE)
-    slug = AutoSlugField(populate_from=['title', 'date_from', 'date_to'])
+    slug = AutoSlugField(populate_from=['id'])
 
     def __str__(self) -> str:
         return f"{self.title} - {self.location} - {self.date_from.strftime('%c')}"

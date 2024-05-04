@@ -13,6 +13,7 @@ def main(request):
 
 
 def sign_up(request):
+    # Richard Repenning - New User Account creation
     if request.method == 'POST':
         form = SignupForm(request.POST)
         # validate the form
@@ -28,11 +29,19 @@ def sign_up(request):
 
 
 def events(request):
+    # Richard Repenning - Events List
     events = Event.objects.all().values()
     return render(request, "events/index.html", {'events': events})
 
 
+def event_detail(request, slug):
+    # Richard Repenning - Event Detail Page
+    event = Event.objects.get(slug=slug)
+    return render(request, "events/event.html", {'event': event})
+
+
 def profile(request):
+    # Richard Repenning - Profile Page
     user_profile = request.user.profile
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=request.user.profile)
@@ -63,6 +72,7 @@ def profile(request):
 @login_required
 @transaction.atomic
 def update_profile(request):
+    # Richard Repenning - Profile Information Update
     user_profile = request.user.profile
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
