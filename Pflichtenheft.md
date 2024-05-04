@@ -34,6 +34,7 @@ Ein Event kann von einem Administrator angelegt werden. Ein Event wird einer Loc
 - location: An welchem Ort die Veranstaltung stattfindet.
 - date_from: Zeitpunkt des Starts der Veranstaltung.
 - date_to: Zeitpunkt des Endes der Veranstaltung.
+- description: Eine Textbeschreibung für das Event
 - max_participants: Maximale Teilnehmerzahl.
 - tickets_sold: Verkaufte Tickets, die nicht storniert wurden.
 - event_status: Der Status des Events z.B. "aktiv", "inaktiv", "abgesagt", "ausverkauft" und weitere.
