@@ -2,8 +2,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1>{{event.title}}</h1>
-    <p>{{event.description}}</p>
-</div>
+    <div class="container">
+        <div class="col shadow mt-5 p-3">
+            <div class="">
+                <h1>{{ event.title }}</h1>
+                <span>{{ event.date_from|date:"D: d. M - H:i" }} Uhr bis {{ event.date_to|date:"D d. M - H:i" }} Uhr</span>
+            </div>
+            <p>{{ event.description }}</p>
+        </div>
+    </div>
 {% endblock content %}
