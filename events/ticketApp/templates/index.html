@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
-  Eventmanagement
+    Eventmanagement
 {% endblock title %}
 
 {% block content %}
-<div class="container position-relative">
-  <div class="row align-items-center">
-    <div class="col-12 col-lg-6 pt-24">
-      <div class="mw-xl mw-lg-2xl mx-auto mx-lg-0">
-        <h1 class="h2 mb-6">Veranstaltungen</h1>
-      </div>
+    <div class="container-fluid intro-wrapper position-relative h-100 overflow-hidden">
+        <div class="bg-image-holder"
+             style="background-image: url('{% static 'images/eventmanagement-background-hero.webp' %}')"></div>
+        <div class="content-area position-relative d-flex align-items-center text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="title-area text-center mb-5 mt-5">
+                            <h1>Veranstaltungskalender</h1>
+                            <p>Entdecken. Erleben. Genießen</p>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-outline-warning" href="{% url 'events' %}">Alle Events entdecken</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 {% endblock content %}

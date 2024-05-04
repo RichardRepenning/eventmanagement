@@ -2,21 +2,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% endblock title %}</title>
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-  {% include 'nav/nav.html' %}
-  
-  {% block content %}
+{% include 'nav/nav.html' %}
 
-  {% endblock content %}
+{% block content %}
 
-  {% block modal %}
-    
-  {% endblock modal %}
-  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+{% endblock content %}
+
+{% block modal %}
+
+{% endblock modal %}
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

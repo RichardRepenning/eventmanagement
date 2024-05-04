@@ -4,51 +4,55 @@
 {% load widget_tweaks %}
 
 {% block title %}
-  Dein Profil - Eventmanagement App
+    Dein Profil - Eventmanagement App
 {% endblock title %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="row shadow mb-3 py-3">
-    <h3>Deine persönlichen Informationen</h3>
-    {% if profile_incomplete %}
-    <div class="pe-5">
-      <div class="alert alert-warning" role="alert">
-        Dein Profil ist noch unvollständig! <a href="/profile/update">Jetzt vervollständigen!</a>
-      </div>
+    <div class="container">
+        <div class="row mt-5 gap-3">
+            <div class="col shadow p-4">
+                <h2>Persönlichen Informationen</h2>
+                {% if profile_incomplete %}
+                    <div class="alert alert-warning" role="alert">
+                        Dein Profil ist noch unvollständig! <a href="/profile/update">Jetzt vervollständigen!</a>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-6">
+                        <h5>Vorname</h5>
+                        {{ request.user.first_name }}
+                    </div>
+                    <div class="col-6">
+                        <h5>Nachname</h5>
+                        {{ request.user.last_name }}
+                    </div>
+                    <div class="col-6">
+                        <h5>Straße & Nr.</h5>
+                        {{ user_profile.street }}
+                    </div>
+                    <div class="col-6">
+                        <h5>Plz. & Stadt</h5>
+                        {{ user_profile.zip_code }} {{ user_profile.city }}
+                    </div>
+                    <div class="col-6">
+                        <h5>Geburtsdatum</h5>
+                        {{ user_profile.birth_date }}
+                    </div>
+                </div>
+            </div>
+            <div class="col shadow p-4">
+                <div class="row">
+                    <h2>Account Informationen</h2>
+                    <div class="col-6">
+                        <h5>Benutzername</h5>
+                        {{ request.user.get_username }}
+                    </div>
+                    <div class="col-6">
+                        <h5>E-Mail</h5>
+                        {{ request.user.email }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    {% endif %}
-    <div class="col-6">
-      <h5>Vorname</h5>
-      {{request.user.first_name}}
-    </div>
-    <div class="col-6">
-      <h5>Nachname</h5>
-      {{request.user.last_name}}
-    </div>
-    <div class="col-6">
-      <h5>Straße & Nr.</h5>
-      {{user_profile.street}}
-    </div>
-    <div class="col-6">
-      <h5>Plz. & Stadt</h5>
-      {{user_profile.zip_code}} {{user_profile.city}}
-    </div>
-    <div class="col-6">
-      <h5>Geburtsdatum</h5>
-      {{user_profile.birth_date}}
-    </div>
-  </div>
-  <div class="row shadow py-3">
-    <h3>Deine Account Informationen</h3>
-    <div class="col-6">
-      <h5>Benutzername</h5>
-      {{request.user.get_username}}
-    </div>
-    <div class="col-6">
-      <h5>E-Mail</h5>
-      {{request.user.email}}
-    </div>
-  </div>
-</div>
 {% endblock content %}

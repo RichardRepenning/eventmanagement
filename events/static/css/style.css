@@ -1,0 +1,28 @@
+.intro-wrapper {
+    min-height: calc(100vh - 88px);
+}
+.intro-wrapper:before{
+    background: rgba(47, 38, 57, 0.8);
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+.bg-image-holder {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.content-area {
+    z-index: 2;
+}

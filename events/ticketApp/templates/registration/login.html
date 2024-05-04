@@ -4,21 +4,26 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="container">
-  <form action="{%url 'login' %}" method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="username" class="form-label">Benutzername</label>
-      {% render_field form.username class="form-control" id="username" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mx-auto mt-5 shadow p-4">
+                <h2>Anmelden</h2>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Benutzername</label>
+                        {% render_field form.username class="form-control" id="username" %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Passwort</label>
+                        {% render_field form.password class="form-control" id="password" %}
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+                <p>Noch keinen Account? Registriere dich <a href="{% url 'signup' %}">hier</a></p>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Passwort</label>
-      {% render_field form.password class="form-control" id="password" %}
-    </div>
-    <div class="mb-3">
-      <button type="submit" class="btn btn-primary">Login</button>
-    </div>
-  </form>
-  <p>Du hast noch keinen Account? Registriere dich <a href="{% url 'signup' %}">hier</a></p>
-</div>
 {% endblock content %}
