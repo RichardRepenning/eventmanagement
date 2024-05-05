@@ -1,7 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
-from .models import Event
+from .models import Event, Ticket
 from django.contrib.auth import logout, login, authenticate
 from .forms import SignupForm, ProfileForm
 from django.db import transaction
@@ -37,7 +37,9 @@ def events(request):
 def event_detail(request, slug):
     # Richard Repenning - Event Detail Page
     event = Event.objects.get(slug=slug)
-    return render(request, "events/event.html", {'event': event})
+    # Richard Repenning -  Check if user already bought that ticket
+    user_ticket = Ticket.objects.filter(user=request.user, event=event).exists()
+    return render(request, "events/event.html", {'event': event, 'user_has_ticket': user_ticket})
 
 
 def profile(request):
@@ -96,3 +98,44 @@ def testing(request):
         'genres': ['Techno', 'Rock', 'Pop']
     }
     return HttpResponse(template.render(context, request))
+
+
+def checkout(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    is_ticket = Ticket.objects.filter(user=request.user, event=event).exists()
+    if is_ticket and Ticket.objects.filter(user=request.user, event=event).get().status == 'Open':
+        return render(request, 'checkout/index.html', {'ticket': Ticket.objects.filter(user=request.user, event=event).get(), 'event': event})
+
+    ticket = Ticket.objects.create(user=request.user, event=event, price=event.base_price)
+    return render(request, 'checkout/index.html', {'ticket': ticket, 'event': event})
+
+
+def payment(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    ticket = get_object_or_404(Ticket, user=request.user, event=event)
+    if ticket:
+        ticket.status = Ticket.TicketStatus.PAYED
+        ticket.save()
+        event.tickets_sold += 1
+        event.save()
+
+    return render(request, "checkout/payment.html", {'event': event, 'ticket': ticket})
+
+
+def tickets(request):
+    tickets = Ticket.objects.filter(user=request.user)
+    return render(request, "profile/tickets.html", {'tickets': tickets})
+
+
+def cancel_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    event = ticket.event
+
+    ticket.delete()
+
+    if event:
+        event.tickets_sold -= 1
+        event.save()
+
+    return render(request, "profile/ticket-cancelled.html", {'ticket': ticket})
+

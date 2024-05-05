@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+<h2>Danke, für deine Bestellung</h2>
+    <div class="row">
+        <div class="col">{{ event.title }}</div>
+        <a href="/events">Zu allen Events</a>
+    </div>
+</div>
+{% endblock content %}

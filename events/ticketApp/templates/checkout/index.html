@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="mt-5">Checkout</h2>
+        <div class="row mt-5">
+            <div class="col-12 col-lg-6 shadow p-3">
+                <h4>Event:</h4> {{ event.title }}
+                <h4>Zeitraum:</h4> {{ event.date_from|date:"d.m.Y" }} - {{ event.date_to|date:"d.m.Y" }}
+                <h4>Preis:</h4> {{ ticket.price }}
+            </div>
+            <div class="col mt-5 mt-lg-0">
+                <a href="{% url 'payment' event_id=event.id %}" class="btn btn-success">Bezahlen</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

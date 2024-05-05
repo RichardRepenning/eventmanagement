@@ -2,10 +2,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container pb-5">
         <div class="row mt-5 gap-5">
             <div class="col col-lg-8 shadow p-3">
-                <h1>{{ event.title }}</h1>
+                <div class="d-inline">
+                    <h1>{{ event.title }}</h1>
+                    <p>{{ event.tickets_sold }}</p>
+                </div>
                 <p class="mt-5">{{ event.description }}</p>
             </div>
             <div class="col shadow p-3">
@@ -17,6 +20,19 @@
                     <h5 class="mt-3">Uhrzeit</h5>
                     {{ event.date_from|date:"H:i" }} - {{ event.date_to|date:"H:i" }} Uhr
                 </div>
+            </div>
+            <div class="col-12">
+                {% if not user_has_ticket and event.event_status == 'AC' and event.tickets_sold < event.max_participants %}
+                    <a href="{% url 'checkout' event_id=event.id %}" class="btn btn-success">Ticket kaufen</a>
+                {% endif %}
+                {% if user_has_ticket %}
+                    <p>Du hast das Ticket bereits gekauft</p>
+                {% endif %}
+                {% if event.event_status == 'SO' %}
+                    <span class="badge text-bg-warning">Ausverkauft</span>
+                {% elif event.event_status == 'CA' %}
+                    <span class="badge text-bg-danger">Abgesagt</span>
+                {% endif %}
             </div>
         </div>
         <div class="row mt-5">
