@@ -14,6 +14,7 @@
 | 17.04.2024 | Einleitung       | Richard Repenning |
 | 17.04.2024 | Auftrag          | Richard Repenning |
 | 19.04.2024 | Auftrag - Profil | Richard Repenning |
+| 05.05.2024 | Anpassungen      | Richard Repenning |
 
 
 ## 1. Einleitung
@@ -38,6 +39,7 @@ Ein Event kann von einem Administrator angelegt werden. Ein Event wird einer Loc
 - max_participants: Maximale Teilnehmerzahl.
 - tickets_sold: Verkaufte Tickets, die nicht storniert wurden.
 - event_status: Der Status des Events z.B. "aktiv", "inaktiv", "abgesagt", "ausverkauft" und weitere.
+- base_price: Der zu bezahlende Preis für das Event
 - slug: Eine eindeutige URL für das Event.
 
 Events werden auf der Seite in einer Eventübersicht angezeigt. Die Eventübersicht ist aufsteigend nach Datum sortiert, d.h. das am nächsten gelegene Event wird als erstes angezeigt. Events, die bereits abgelaufen sind oder "inaktiv" Status haben, werden nicht mehr angezeigt und automatisch archiviert. Ein Event besitzt einen Status ("abgesagt", "ausverkauft"). Der Status kann im Adminbereich verändert werden. Ein neues Event hat standardmäßig den status "inaktiv". Ist die maximale Anzahl an Tickets verkauft, wird der Status des Events automatisch auf "ausverkauft" gesetzt. Ein Event mit diesem Status, das noch nicht stattgefunden hat wird in der Übersicht noch angezeigt, der Ticketkauf ist nicht mehr möglich.
@@ -46,8 +48,7 @@ Events werden auf der Seite in einer Eventübersicht angezeigt. Die Eventübersi
 
 Ein Ticket wird bei erfolgreichem Kauf einem Event zugeordnet und belegt einen Platz bei den verkauften Tickets.
 Für den Kauf eines Tickets benötigt der Käufer einen Account. Das gekaufte Ticket wird dem Account zugeordnet und ist personalisiert.
-Hat das Event noch nicht stattgefunden kann das Ticket bis 24 Stunden vor Beginn des Events storniert werden. Wurde ein Ticket storniert ist das Ticket zum Kauf wieder verfügbar. Das Ticket ist nach dem Kauf im Kundenkonto sichtbar und kann dort heruntergeladen werden. Ein storniertes Ticket wird mit dem Status weiterhin angezeigt.
-Ein Ticket enthält einen Barcode, der die Daten des Käufers und die Ticket ID enthält. Wird dieser Barcode gescannt, kann der Status des Tickets abgefragt werden.
+Hat das Event noch nicht stattgefunden kann das Ticket bis 24 Stunden vor Beginn des Events storniert werden. Wurde ein Ticket storniert ist das Ticket zum Kauf wieder verfügbar.
 
 Ein Ticket hat die folgenden Daten:
 - ID: Eindeutige Ticket-ID
@@ -66,8 +67,6 @@ Eine Location wird mit den folgenden Daten angelegt:
 - max_capacity: Die maximale Personenzahl für die Location.
 
 #### Benutzer
-Anmerkung der Redaktion: https://docs.djangoproject.com/en/5.0/topics/auth/default/#user-objects - __VOR ABGABE LÖSCHEN__
-
 Um ein Ticket für ein Event zu kaufen, muss vor dem Kauf ein Benutzer Account erstellt werden oder der Besucher muss sich in seinen bestehenden Account einloggen. Dies kann er entweder direkt auf der Seite machen oder im Checkout-Prozess des Ticketkaufs. Hat der Benutzer noch keinen Account, kann er sich einen erstellen.
 Ein Benutzeraccount hat die folgenden Informationen:
 
