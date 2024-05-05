@@ -37,9 +37,12 @@ def events(request):
 def event_detail(request, slug):
     # Richard Repenning - Event Detail Page
     event = Event.objects.get(slug=slug)
-    # Richard Repenning -  Check if user already bought that ticket
-    user_ticket = Ticket.objects.filter(user=request.user, event=event).exists()
-    return render(request, "events/event.html", {'event': event, 'user_has_ticket': user_ticket})
+    if request.user.is_authenticated:
+        # Richard Repenning -  Check if user already bought that ticket
+        user_ticket = Ticket.objects.filter(user=request.user, event=event).exists()
+        return render(request, "events/event.html", {'event': event, 'user_has_ticket': user_ticket})
+
+    return render(request, "events/event.html", {'event': event})
 
 
 def profile(request):
@@ -101,13 +104,16 @@ def testing(request):
 
 
 def checkout(request, event_id):
-    event = get_object_or_404(Event, id=event_id)
-    is_ticket = Ticket.objects.filter(user=request.user, event=event).exists()
-    if is_ticket and Ticket.objects.filter(user=request.user, event=event).get().status == 'Open':
-        return render(request, 'checkout/index.html', {'ticket': Ticket.objects.filter(user=request.user, event=event).get(), 'event': event})
+    if request.user.is_authenticated:
+        event = get_object_or_404(Event, id=event_id)
+        is_ticket = Ticket.objects.filter(user=request.user, event=event).exists()
+        if is_ticket and Ticket.objects.filter(user=request.user, event=event).get().status == 'Open':
+            return render(request, 'checkout/index.html', {'ticket': Ticket.objects.filter(user=request.user, event=event).get(), 'event': event})
 
-    ticket = Ticket.objects.create(user=request.user, event=event, price=event.base_price)
-    return render(request, 'checkout/index.html', {'ticket': ticket, 'event': event})
+        ticket = Ticket.objects.create(user=request.user, event=event, price=event.base_price)
+        return render(request, 'checkout/index.html', {'ticket': ticket, 'event': event})
+    else:
+        return redirect('login')
 
 
 def payment(request, event_id):
